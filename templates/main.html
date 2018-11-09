@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+        {% for item in main %}
+            <th scope="col" class="text-center">{{ item.alias }}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        {% for item in main %}
+            <td class="text-center">
+                    {% if item.status == "SUCCESS" %}
+                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-check" style="color: green;"></i>
+                    {% elif item.status == "CRASH" %}
+                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-remove" style="color: red;"></i>
+                    {% else %}
+                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-minus" style="color: black;"></i>
+                    {% endif %}
+                </a>
+            </td>
+        {% endfor %}
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+{% endblock %}

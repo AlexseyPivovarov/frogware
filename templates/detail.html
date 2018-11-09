@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+
+<table class="table">
+  <thead>
+    <tr class="text-center">
+      <th scope="col">Build ID</th>
+      <th scope="col">Platform</th>
+      <th scope="col">Quest Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center">
+      <td>{{ general.globalId }}</td>
+      <td>{{ general.platform }}</td>
+      <td>{{ general.name }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+<div><h3 class="text-center">Pathways</h3></div>
+
+<table class="table table-striped mt-4">
+  <thead>
+    <tr class="text-center">
+      <th scope="col">Status</th>
+      <th scope="col">Path name</th>
+      <th scope="col">Leafs info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center">
+      <td>{{ general.pathway.status }}</td>
+      <td>{{ general.pathway.name }}</td>
+      <td>
+
+          {% for item in general.pathway.leafs %}
+            {% if item in finished %}
+                <i class="fa fa-check" style="color: green;"></i>
+            {% else %}
+                <i class="fa fa-remove" style="color: red;"></i>
+            {% endif %}
+            {% if not forloop.last %}
+                <i class="fa fa-long-arrow-right" style="color: grey;"></i>
+            {% endif %}
+          {% endfor %}
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
