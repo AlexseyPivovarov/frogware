@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.MyMeinView.as_view(), name='main_view'),
     path('detail/<str:alias><int:globalId>/', views.MyDetailView.as_view(), name='detail'),
+    path('api/', views.MyApi.as_view(), name='api'),
 ]

@@ -4,6 +4,19 @@ from json import loads
 
 
 # Create your views here.
+
+class MyApi(View):
+
+    def get(self, request):
+        return HttpResponse(status=201)
+
+    def post(self, request):
+        with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='w') as main_js:
+            main_js.write(request.body.decode("utf-8"))
+
+        return HttpResponse(status=201)
+
+
 class MyMeinView(View):
 
     def get(self, request):
@@ -11,12 +24,6 @@ class MyMeinView(View):
             context = {}
             context['main'] = loads(main_js.read())
             return render(request, template_name='main.html', context=context)
-
-    def post(self, request):
-        with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='w') as main_js:
-            main_js.write(request.body.decode("utf-8"))
-
-        return HttpResponse(status=201)
 
 
 class MyDetailView(View):
@@ -30,7 +37,7 @@ class MyDetailView(View):
                     context['general'] = item
                     break
             else:
-                return render(request, template_name='not-found.html')
+                return render(request, template_name='not-found.html', status=404)
         with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='r') as finished_js:
             for item in loads(finished_js.read()):
                 if item['questId'] == context['general']['id']:

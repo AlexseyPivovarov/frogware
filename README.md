@@ -1,26 +1,26 @@
 **Install**
 
-virtualenv setup
 
 
-Run application:
+
+**Run application:**
 python manage.py runserver
-
-
-
 
 **Usage:**
 
 Available Endponits:
 
 - GET /   
-   Download main page html
-- GET /detail/\<str:alias>\<int:globalId>
-    alias - quest alias    
-    globalId - quest globalId
+    Download main page html
+- GET /detail/\<str:alias>\<int:globalId>       
+    Download detail html
+    > alias - quest alias    
+     globalId - quest globalId
    
-- POST /update 
-Body: <File content>
+- POST /api/        
+    Upload FinishedQuestsLeafs.json     
+    > Body: \<File content>
+
 
 
 
