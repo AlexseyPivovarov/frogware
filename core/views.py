@@ -12,6 +12,12 @@ class MyMeinView(View):
             context['main'] = loads(main_js.read())
             return render(request, template_name='main.html', context=context)
 
+    def post(self, request):
+        with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='w') as main_js:
+            main_js.write(request.body.decode("utf-8"))
+
+        return HttpResponse(status=201)
+
 
 class MyDetailView(View):
 
