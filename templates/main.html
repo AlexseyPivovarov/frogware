@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}Main{% endblock %}
 
@@ -16,12 +17,14 @@
     <tr>
         {% for item in main %}
             <td class="text-center">
+                <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}">
+                    <!--<i id="icon" :class=fafa style="color: green;"></i>-->
                     {% if item.status == "SUCCESS" %}
-                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-check" style="color: green;"></i>
+                        <i class="fa fa-check" style="color: green;"></i>
                     {% elif item.status == "CRASH" %}
-                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-remove" style="color: red;"></i>
+                        <i class="fa fa-remove" style="color: red;"></i>
                     {% else %}
-                        <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}"><i class="fa fa-minus" style="color: black;"></i>
+                        <i class="fa fa-minus" style="color: black;"></i>
                     {% endif %}
                 </a>
             </td>
@@ -30,5 +33,7 @@
   </tbody>
 </table>
 <hr>
+
+<div id="icon">!{ fafa }</div>
 
 {% endblock %}
