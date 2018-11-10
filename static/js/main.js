@@ -1,18 +1,10 @@
-var app = new Vue ({
-    el: '#icon',
+const vm = new Vue ({
+    el: '#app',
     data: {
-        fafa: "fa fa-check"
+        page: {}
     },
     delimiters: ['!{','}'],
-    computed: {
-        fafaa() {
-            if (this.item.status == "SUCCESS") {
-            return "fa fa-check"
-            } else if (this.item.status == "CRASH") {
-            return "fa fa-remove"
-            } else {
-            return "fa fa-minus"
-            }
-        }
-    }
+    beforeMount(){
+        this.page = JSON.parse(document.getElementsByTagName('table')[0].getAttribute('data') || '{}');
+    },
 })

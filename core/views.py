@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views import View
-from json import loads
+from json import loads, dumps
 
 
 # Create your views here.
@@ -8,7 +8,7 @@ from json import loads
 class MyApi(View):
 
     def get(self, request):
-        return HttpResponse(status=201)
+        return HttpResponse(status=201, )
 
     def post(self, request):
         with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='w') as main_js:
@@ -23,6 +23,7 @@ class MyMeinView(View):
         with open('json/MainPageInfo.json', encoding='utf-8', mode='r') as main_js:
             context = {}
             context['main'] = loads(main_js.read())
+            context['json'] = dumps(context['main'])
             return render(request, template_name='main.html', context=context)
 
 

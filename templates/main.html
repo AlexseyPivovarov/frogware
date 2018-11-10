@@ -5,35 +5,24 @@
 
 {% block content %}
 
-<table class="table">
+<table id="app" class="table" data="{{ json }}">
   <thead class="thead-dark">
     <tr>
-        {% for item in main %}
-            <th scope="col" class="text-center">{{ item.alias }}</th>
-        {% endfor %}
+            <th v-for="item in page" scope="col" class="text-center">!{ item.alias }</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-        {% for item in main %}
-            <td class="text-center">
-                <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}">
-                    <!--<i id="icon" :class=fafa style="color: green;"></i>-->
-                    {% if item.status == "SUCCESS" %}
-                        <i class="fa fa-check" style="color: green;"></i>
-                    {% elif item.status == "CRASH" %}
-                        <i class="fa fa-remove" style="color: red;"></i>
-                    {% else %}
-                        <i class="fa fa-minus" style="color: black;"></i>
-                    {% endif %}
+            <td v-for="item in page" class="text-center">
+                <a class="nav-link text-truncate" :href="'detail/' + item.alias + item.globalId">
+                        <i v-if="item.status == 'SUCCESS'" class="fa fa-check" style="color: green;"></i>
+                        <i v-if="item.status == 'CRASH'" class="fa fa-remove" style="color: red;"></i>
+                        <i v-if="item.status == 'NO_DATA'" class="fa fa-minus" style="color: black;"></i>
                 </a>
             </td>
-        {% endfor %}
     </tr>
   </tbody>
 </table>
 <hr>
-
-<div id="icon">!{ fafa }</div>
 
 {% endblock %}
