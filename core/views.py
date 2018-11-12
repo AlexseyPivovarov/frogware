@@ -1,20 +1,21 @@
 from django.shortcuts import render, HttpResponse
 from django.views import View
 from json import loads, dumps
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 # Create your views here.
-
-class MyApi(View):
+class MyApi(APIView):
 
     def get(self, request):
-        return HttpResponse(status=201, )
+        return Response(status=200, )
 
     def post(self, request):
         with open('json/FinishedQuestsLeafs.json', encoding='utf-8', mode='w') as main_js:
             main_js.write(request.body.decode("utf-8"))
 
-        return HttpResponse(status=201)
+        return Response(status=201)
 
 
 class MyMeinView(View):
@@ -23,7 +24,6 @@ class MyMeinView(View):
         with open('json/MainPageInfo.json', encoding='utf-8', mode='r') as main_js:
             context = {}
             context['main'] = loads(main_js.read())
-            context['json'] = dumps(context['main'])
             return render(request, template_name='main.html', context=context)
 
 

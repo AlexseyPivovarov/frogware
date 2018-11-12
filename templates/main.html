@@ -5,26 +5,32 @@
 
 {% block content %}
 
-<table id="app" class="table" data="{{ json }}">
+<table class="table">
   <thead class="thead-dark">
     <tr>
-            <th v-for="item in page" scope="col" class="text-center">!{ item.alias }</th>
+        {% for item in main %}
+            <th scope="col" class="text-center">{{ item.alias }}</th>
+        {% endfor %}
     </tr>
   </thead>
   <tbody>
     <tr>
-            <td v-for="item in page" class="text-center">
-                <a class="nav-link text-truncate" :href="'detail/' + item.alias + item.globalId">
-                        <i v-if="item.status == 'SUCCESS'" class="fa fa-check" style="color: green;"></i>
-                        <i v-if="item.status == 'CRASH'" class="fa fa-remove" style="color: red;"></i>
-                        <i v-if="item.status == 'NO_DATA'" class="fa fa-minus" style="color: black;"></i>
+        {% for item in main %}
+            <td class="text-center">
+                <a class="nav-link text-truncate" href="{% url 'detail' alias=item.alias globalId=item.globalId %}">
+                    {% if item.status == 'SUCCESS' %}
+                        <i class="fa fa-check" style="color: green;"></i>
+                    {% elif item.status == 'CRASH' %}
+                        <i class="fa fa-remove" style="color: red;"></i>
+                    {% else %}
+                        <i class="fa fa-minus" style="color: black;"></i>
+                    {% endif %}
                 </a>
             </td>
+        {% endfor %}
     </tr>
   </tbody>
 </table>
 <hr>
-
-<script src="{% static '/js/main.js' %}"></script>
 
 {% endblock %}
